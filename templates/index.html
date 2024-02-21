@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form label {
+            font-weight: bold;
+        }
+        form input[type="text"] {
+            margin-top: 10px;
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        form button[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        h2, p {
+            text-align: center;
+        }
+        p {
+            margin-top: 10px;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 200px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </div>
+    
+    <h1>Student Information</h1>
+   
+
+    <form method="POST">
+        <label for="roll_number">Enter Roll Number:</label>
+        <input type="text" name="roll_number" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if user_data %}
+        <h2>Details for Roll Number {{ user_data.roll_number }}</h2>
+        <p>Name: {{ user_data.name }}</p>
+        <p>Events Registered: {{ user_data.events|join(', ') }}</p>
+    {% endif %}
+
+</body>
+</html>

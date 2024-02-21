@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form label {
+            font-weight: bold;
+        }
+        form input[type="file"] {
+            margin-top: 10px;
+        }
+        form button[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            list-style-type: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <label for="file">Upload Excel File:</label>
+        <input type="file" name="file" id="file" accept=".xlsx, .xls">
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Existing Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Events</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in existing_data.iterrows() %}
+            <tr>
+                <td>{{ row['RollNumber'] }}</td>
+                <td>{{ row['Name'] }}</td>
+                <td>
+                    <ul>
+                        {% for event in row[2:] %}
+                            {% if event %}
+                                <li>{{ event }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
